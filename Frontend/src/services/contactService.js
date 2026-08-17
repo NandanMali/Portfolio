@@ -13,8 +13,10 @@
 //
 // Until that's wired up, this throws so the UI never fakes a success state.
 
+import axios from 'axios';
+
 export async function submitContactForm(formData) {
-  throw new Error(
-    "Contact form backend is not connected yet. Wire submitContactForm() in src/services/contactService.js to your API."
-  );
-}
+ const res = await axios.post("http://localhost:5000/api/contact", formData);
+  if (!(res.status===200)) throw new Error("Request failed");
+  return true;}
+
